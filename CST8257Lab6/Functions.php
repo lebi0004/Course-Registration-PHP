@@ -14,21 +14,6 @@ function getPDO() {
     return $pdo;
 }
 
-// Function to get a user by Student ID (used in login)
-/*function getUserById($userId) {
-    $pdo = getPDO();
-    $sql = "SELECT * FROM Student WHERE StudentId = :userId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':userId', $userId);
-    $stmt->execute();
-    
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row) {
-        return new User($row['StudentId'], $row['Name'], $row['Phone'], $row['Password']);
-    } else {
-        return null;
-    }
-}*/
 
 // Function to get a user by Student ID and Password (for login)
 function getUserByIdAndPassword($userId, $password) {
@@ -44,33 +29,7 @@ function getUserByIdAndPassword($userId, $password) {
     }
     return null;
 }
-// function getUserByIdAndPassword($studentId, $password)
-// {
-//      $pdo = getPDO();
-    
-//     $sql = "SELECT StudentId, Name, Phone FROM Student WHERE StudentId = :userId AND Password = :password";
 
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->execute(['userId' => $studentId, 'password' => $password]);
-//     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-//     if ($row)
-//     {
-//         return new User($row['StudentId'], $row['Name'], $row['Phone'] );
-//     }
-//     return null;
-// }
-
-// Function to add a new user to the Student table (used for registration)
-// function addNewUser($userId, $name, $phone, $password) {
-//     $pdo = getPDO();
-//     $sql = "INSERT INTO Student (StudentId, Name, Phone, Password) VALUES (:userId, :name, :phone, :password)";
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->bindValue(':userId', $userId);
-//     $stmt->bindValue(':name', $name);
-//     $stmt->bindValue(':phone', $phone);
-//     $stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT)); // Store hashed password
-//     $stmt->execute();
-// }
 
 function addNewUser($userId, $name, $phone, $password)
 {
@@ -80,21 +39,6 @@ function addNewUser($userId, $name, $phone, $password)
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['studentId' => $userId, 'name' => $name, 'phone' => $phone, 'password' => $password]);
 }
-
-/*function addNewUser($userId, $name, $phone, $password) 
-{
-    $pdo = getPDO();
-    $sql = "INSERT INTO Student VALUES(:studentId, :name, :phone, :password)";
-    $stmt = $pdo->prepare($sql);
-    
-    // Hash the password before storing it
-    $stmt->execute([
-        'studentId' => $userId,
-        'name' => $name,
-        'phone' => $phone,
-        'password' => password_hash($password, PASSWORD_DEFAULT)
-    ]);
-}*/
 
 
 // Function to check if a student already exists by Student ID
